@@ -1,0 +1,514 @@
+/* שפה עיצובית מרכזית - "סטיקר מודרני" */
+
+/* ============================
+   Design Tokens (CSS Variables)
+   ============================ */
+:root {
+  /* צבעים עיקריים - פסטליים בהשראת הסטיקרים */
+  --brand-purple: #b995e1;
+  --brand-mint: #9fe0b0;
+  --brand-orange: #e59c51;
+  --brand-sage: #cfe0cf;
+  --brand-pink: #f2b5d4;
+  --brand-yellow: #f4e285;
+  --brand-blue: #87ceeb;
+  --brand-ink: #0a0a0a; /* הוכהה לקריאות טובה יותר */
+  --brand-bg: #f2f2f2;
+
+  /* גווני אפור */
+  --grey-900: #0d0d0d;
+  --grey-800: #1a1a1a;
+  --grey-700: #1f1f1f; /* הוכהה לקונטרסט טוב יותר */
+  --grey-600: #2d2d2d; /* הוכהה */
+  --grey-500: #6b6b6b;
+  --grey-400: #9ca3af;
+  --grey-300: #d1d5db;
+  --grey-200: #e7e7e7;
+  --grey-100: #f3f4f6;
+
+  /* רדיוסים */
+  --radius-full: 9999px;
+  --radius-xl: 26px;
+  --radius-lg: 18px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+  --radius-xs: 4px;
+
+  /* צללים */
+  --shadow-offset: 8px;
+  --shadow-blur: 0;
+  --shadow-color: rgba(0, 0, 0, 0.75);
+  --shadow-light: rgba(0, 0, 0, 0.15);
+
+  /* מרווחים */
+  --space-0: 0;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* טיפוגרפיה מותאמת לקריאות */
+  --font-sans: "Heebo", "Assistant", "Rubik", "Noto Sans Hebrew", "Arial Hebrew",
+    "Tahoma", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+
+  /* גדלי גופן מותאמים - יותר קריאים */
+  --fs-xs: 13px; /* הוגדל מ-12px */
+  --fs-sm: 15px; /* הוגדל מ-14px */
+  --fs-md: 17px; /* הוגדל מ-16px - זהו הגודל הבסיסי */
+  --fs-lg: 19px; /* הוגדל מ-18px */
+  --fs-xl: 22px; /* הוגדל מ-20px */
+  --fs-2xl: 26px; /* הוגדל מ-24px */
+  --fs-3xl: 32px; /* הוגדל מ-30px */
+  --fs-4xl: 38px; /* הוגדל מ-36px */
+  --fs-5xl: clamp(32px, 5vw, 52px); /* הוגדל מהטווח הקודם */
+
+  /* משקלי גופן */
+  --weight-light: 300;
+  --weight-reg: 400;
+  --weight-medium: 500;
+  --weight-semi: 600;
+  --weight-bold: 700;
+  --weight-extra: 800;
+  --weight-black: 900;
+
+  /* אנימציות */
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --dur-fast: 150ms;
+  --dur-normal: 300ms;
+  --dur-slow: 500ms;
+
+  /* גבהי שורה מותאמים לעברית */
+  --leading-tight: 1.3; /* הוגדל מ-1.25 */
+  --leading-normal: 1.6; /* הוגדל מ-1.5 */
+  --leading-relaxed: 1.8; /* הוגדל מ-1.75 */
+}
+
+/* ============================
+   בסיס הדף
+   ============================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  direction: rtl;
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+  background: var(--brand-bg);
+  color: var(--brand-ink);
+  font-family: var(--font-sans);
+  line-height: var(--leading-normal);
+  font-size: var(--fs-md);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+
+  /* תמיכה טובה יותר בעברית */
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern" 1, "liga" 1;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ============================
+   כותרות
+   ============================ */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-weight: var(--weight-bold); /* הופחת מ-extra לbold לקריאות טובה יותר */
+  line-height: var(--leading-tight);
+  text-rendering: optimizeLegibility;
+}
+
+h1 {
+  font-size: var(--fs-5xl);
+  margin-bottom: var(--space-4); /* הוגדל המרווח */
+  font-weight: var(--weight-extra); /* רק לכותרת הראשית */
+}
+
+h2 {
+  font-size: var(--fs-4xl);
+  margin-bottom: var(--space-4);
+}
+
+h3 {
+  font-size: var(--fs-3xl);
+  margin-bottom: var(--space-3);
+}
+
+h4 {
+  font-size: var(--fs-2xl);
+  margin-bottom: var(--space-3); /* הוגדל */
+}
+
+p {
+  margin: 0 0 var(--space-4) 0;
+  line-height: var(--leading-normal);
+  /* מיטוב לטקסט ארוך */
+  max-width: 70ch; /* מגביל רוחב שורה לקריאות מיטבית */
+}
+
+.lead {
+  font-size: var(--fs-xl);
+  color: var(--grey-600); /* הוחלף מ-grey-700 לקונטרסט מותאם */
+  line-height: var(--leading-relaxed);
+}
+
+/* ============================
+   מחלקות עזר
+   ============================ */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-6);
+}
+
+.flex {
+  display: flex;
+}
+.flex-col {
+  flex-direction: column;
+}
+.items-center {
+  align-items: center;
+}
+.justify-center {
+  justify-content: center;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.gap-2 {
+  gap: var(--space-2);
+}
+.gap-3 {
+  gap: var(--space-3);
+}
+.gap-4 {
+  gap: var(--space-4);
+}
+
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+.font-bold {
+  font-weight: var(--weight-bold);
+}
+.font-semi {
+  font-weight: var(--weight-semi);
+}
+
+/* ============================
+   רכיב ליבה: Sticker
+   ============================ */
+.sticker {
+  --bg: var(--brand-sage);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: var(--space-5) var(--space-8);
+  background: var(--bg);
+  border-radius: var(--radius-xl);
+  border: 3px solid var(--brand-ink);
+  font-size: var(--fs-lg); /* הוגדל */
+  font-weight: var(--weight-bold); /* הופחת מ-extra */
+  line-height: 1.2; /* גובה שורה קומפקטי לכפתורים */
+  box-shadow: var(--shadow-offset) var(--shadow-offset) var(--shadow-blur)
+    var(--shadow-color);
+  transition: all var(--dur-fast) var(--ease-out);
+  text-decoration: none;
+  color: var(--brand-ink);
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  overflow: hidden;
+  border: none;
+}
+
+.sticker:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: calc(var(--shadow-offset) + 3px) calc(var(--shadow-offset) + 3px)
+    var(--shadow-blur) var(--shadow-color);
+}
+
+.sticker:active {
+  transform: translate(0, 0);
+  box-shadow: var(--shadow-offset) var(--shadow-offset) var(--shadow-blur)
+    var(--shadow-color);
+}
+
+.sticker:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* וריאציות צבע */
+.is-purple {
+  --bg: var(--brand-purple);
+}
+.is-mint {
+  --bg: var(--brand-mint);
+}
+.is-orange {
+  --bg: var(--brand-orange);
+}
+.is-sage {
+  --bg: var(--brand-sage);
+}
+.is-pink {
+  --bg: var(--brand-pink);
+}
+.is-yellow {
+  --bg: var(--brand-yellow);
+}
+.is-blue {
+  --bg: var(--brand-blue);
+}
+
+/* גדלים */
+.sticker-sm {
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--fs-sm);
+}
+.sticker-lg {
+  padding: var(--space-6) var(--space-10);
+  font-size: var(--fs-2xl);
+}
+.sticker-xl {
+  padding: var(--space-8) var(--space-12);
+  font-size: var(--fs-3xl);
+}
+
+/* ============================
+   כרטיסים
+   ============================ */
+.card {
+  background: white;
+  border: 3px solid var(--brand-ink);
+  border-radius: var(--radius-lg);
+  box-shadow: 8px 8px 0 var(--shadow-color);
+  overflow: hidden;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+
+.card-header {
+  padding: var(--space-4) var(--space-5);
+  background: var(--brand-sage);
+  border-bottom: 3px solid var(--brand-ink);
+  font-weight: var(--weight-bold);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.card-body {
+  padding: var(--space-5);
+}
+
+/* טקסט בכרטיסים */
+.card-body p {
+  line-height: var(--leading-relaxed); /* גובה שורה גדול יותר בכרטיסים */
+}
+
+.card-footer {
+  padding: var(--space-4) var(--space-5);
+  border-top: 3px solid var(--brand-ink);
+  background: var(--grey-100);
+}
+
+/* ============================
+   שדות קלט
+   ============================ */
+.field {
+  display: grid;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.label {
+  font-weight: var(--weight-semi);
+  font-size: var(--fs-sm);
+  color: var(--grey-700);
+  margin-bottom: var(--space-2); /* מרווח מתחת ללייבל */
+}
+
+.input,
+.select,
+.textarea {
+  border: 3px solid var(--brand-ink);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3) var(--space-4);
+  background: white;
+  font-size: var(--fs-md);
+  font-family: inherit;
+  transition: all var(--dur-fast) var(--ease-out);
+  width: 100%;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(185, 149, 225, 0.3);
+  transform: translateY(-1px);
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* ============================
+   Chips & Badges
+   ============================ */
+.chip {
+  --bg: var(--brand-sage);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-full);
+  border: 3px solid var(--brand-ink);
+  background: var(--bg);
+  font-weight: var(--weight-semi);
+  font-size: var(--fs-sm);
+  box-shadow: 4px 4px 0 var(--shadow-color);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-2);
+  border: 3px solid var(--brand-ink);
+  border-radius: var(--radius-full);
+  background: white;
+  font-weight: var(--weight-semi);
+  font-size: var(--fs-xs);
+  box-shadow: 3px 3px 0 var(--shadow-color);
+}
+
+/* ============================
+   אלמנטי UI נוספים
+   ============================ */
+.error-message {
+  background: #fee2e2;
+  border: 3px solid #dc2626;
+  border-radius: var(--radius-sm);
+  padding: var(--space-3) var(--space-4);
+  color: #b91c1c;
+  font-weight: var(--weight-semi);
+  margin-bottom: var(--space-4);
+  box-shadow: 4px 4px 0 rgba(220, 38, 38, 0.3);
+}
+
+.success-message {
+  background: var(--brand-mint);
+  border: 3px solid var(--brand-ink);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3) var(--space-4);
+  color: var(--brand-ink);
+  font-weight: var(--weight-semi);
+  margin-bottom: var(--space-4);
+  box-shadow: 4px 4px 0 var(--shadow-color);
+}
+
+/* ============================
+   רספונסיביות מותאמת לקריאות
+   ============================ */
+@media (max-width: 768px) {
+  :root {
+    /* גדלי גופן מוגדלים במובייל */
+    --fs-xs: 14px;
+    --fs-sm: 16px;
+    --fs-md: 18px; /* גודל בסיסי גדול יותר במובייל */
+    --fs-lg: 20px;
+    --fs-xl: 24px;
+    --fs-2xl: 28px;
+    --fs-3xl: 34px;
+    --fs-4xl: 40px;
+  }
+
+  .container {
+    padding: var(--space-6) var(--space-4);
+  }
+
+  .sticker {
+    padding: var(--space-3) var(--space-5);
+    font-size: var(--fs-lg);
+  }
+
+  .sticker-sm {
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--fs-sm);
+  }
+
+  /* מרווחים גדולים יותר במובייל לקריאות טובה יותר */
+  p {
+    margin-bottom: var(--space-5);
+    line-height: var(--leading-relaxed);
+  }
+}
+
+/* ============================
+   נגישות
+   ============================ */
+:focus-visible {
+  outline: 3px solid var(--brand-purple);
+  outline-offset: 3px; /* הוגדל */
+  border-radius: var(--radius-xs);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* קונטרסט טוב יותר לטקסט משני */
+small {
+  color: var(--grey-600);
+  font-size: var(--fs-sm); /* הוגדל מהגודל הדיפולטיבי */
+}
+
+/* הסתר/הצג */
+.hidden {
+  display: none;
+}
+.visible {
+  display: block;
+}
