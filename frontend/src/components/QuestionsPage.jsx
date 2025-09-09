@@ -644,7 +644,6 @@ const styles = `
   }
 `;
 
-// הוספת הסגנונות לראש הדף
 if (typeof document !== "undefined") {
   const styleSheet = document.createElement("style");
   styleSheet.innerText = styles;

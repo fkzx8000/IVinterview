@@ -15,8 +15,6 @@ function App() {
 
   return (
     <div className="app">
-      {/* <LoginPage />
-      <QuestionsPage /> */}
       {isAuthenticated ? <QuestionsPage /> : <LoginPage />}
     </div>
   );
